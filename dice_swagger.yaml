@@ -1,0 +1,163 @@
+swagger: '2.0'
+info:
+  version: "1.0.0"
+  title: "DiceApp"
+host: "192.168.0.128:5000"
+paths:
+  /rolls:
+    get:
+      tags:
+        - "Rolls"
+      summary: "Gets all stored rolls."
+      operationId: "getrolls"
+      consumes:
+      - "application/json"
+      responses:
+        '200':
+          description: "Successful"
+          schema:
+            $ref: '#/definitions/Rolls'
+  /roll/{rollId}:
+    get:
+      tags:
+        - "Roll"
+      summary: "Gets a single roll."
+      operationId: "getroll"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "rollId"
+        in: "path"
+        description: "ID of roll to return"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        '200':
+          description: "Successful"
+          schema:
+            $ref: '#/definitions/Roll'
+        '404':
+          description: "Roll not found"
+    delete:
+      tags:
+        - "Roll"
+      summary: "Deletes a roll."
+      operationId: "deleteroll"
+      parameters:
+      - name: "rollId"
+        in: "path"
+        description: "ID of roll to delete"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        '200':
+          description: "Deleted"
+  /roll:
+    post:
+      tags:
+        - "Roll"
+      summary: "Creates a new roll."
+      operationId: "postroll"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Roll to create"
+        required: true
+        schema:
+          $ref: "#/definitions/Roll"
+      responses:
+        '201':
+          description: "Roll created"
+        '400':
+          description: "Invalid roll"
+    put:
+      tags:
+        - "Roll"
+      summary: "Updates a roll."
+      operationId: "putroll"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Roll to create"
+        required: true
+        schema:
+          $ref: "#/definitions/Roll"
+      responses:
+        '200':
+          description: "Roll updated"
+        '400':
+          description: "Invalid roll"
+        '404':
+          description: "Roll not found"
+  /play/{rollId}:
+    get:
+      tags:
+        - "Play"
+      summary: "Rolls a roll."
+      operationId: "playroll"
+      parameters:
+      - name: "rollId"
+        in: "path"
+        description: "ID of roll to roll"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        '200':
+          description: "Request was successful"
+          schema:
+            $ref: '#/definitions/RollResult'
+        '404':
+          description: "Roll not found"
+definitions:
+  Roll:
+    type: "object"
+    required:
+      - "name"
+      - "numberOfDice"
+      - "numberOfSides"
+      - "modifier"
+    properties:
+      id:
+        type: "integer"
+        format: "int32"
+      name:
+        type: "string"
+      numberOfDice:
+        type: "integer"
+        format: "int32"
+      numberOfSides:
+        type: "integer"
+        format: "int32"
+      modifier:
+        type: "integer"
+        format: "int32"
+  Rolls:
+    type: "object"
+    required:
+      - "rolls"
+    properties:
+      rolls:
+        type: "array"
+        items:
+          $ref: "#/definitions/Roll"
+  RollResult:
+    type: "object"
+    required:
+      - "result"
+    properties:
+      result:
+        type: "integer"
+        format: "int32"
+tags:
+  - name: "Rolls"
+  - name: "Roll"
+  - name: "Play"
