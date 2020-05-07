@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">DiceApp</string>
+    <string name="modifier">Modifier</string>
+    <string name="number_of_dice">Number of Dice</string>
+    <string name="number_of_sides">Number of Sides</string>
+    <string name="rolls_name_hint">Roll\'s name</string>
+    <string name="number_of_dice_hint">1</string>
+    <string name="number_of_sides_hint">20</string>
+    <string name="modifier_hint">0</string>
+    <string name="save_button_text">Save</string>
+    <string name="delete_button_text">Delete</string>
 </resources>

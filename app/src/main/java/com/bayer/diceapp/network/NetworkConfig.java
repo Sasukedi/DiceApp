@@ -1,5 +1,5 @@
 package com.bayer.diceapp.network;
 
 public class NetworkConfig {
-    public static final String ENDPOINT_ADDRESS = "http://192.168.0.128:5000/";
+    public static final String ENDPOINT_ADDRESS = "http://10.0.2.2:5000/";
 }

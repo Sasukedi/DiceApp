@@ -19,7 +19,19 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public RollApi provideChatApi(Retrofit.Builder retrofitBuilder) {
+    public RollApi provideRollApi(Retrofit.Builder retrofitBuilder) {
         return retrofitBuilder.baseUrl(NetworkConfig.ENDPOINT_ADDRESS).build().create(RollApi.class);
+    }
+
+    @Provides
+    @Singleton
+    public RollsApi provideRollsApi(Retrofit.Builder retrofitBuilder) {
+        return retrofitBuilder.baseUrl(NetworkConfig.ENDPOINT_ADDRESS).build().create(RollsApi.class);
+    }
+
+    @Provides
+    @Singleton
+    public PlayApi providePlayApi(Retrofit.Builder retrofitBuilder) {
+        return retrofitBuilder.baseUrl(NetworkConfig.ENDPOINT_ADDRESS).build().create(PlayApi.class);
     }
 }

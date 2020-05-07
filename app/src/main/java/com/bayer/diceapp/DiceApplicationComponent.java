@@ -9,6 +9,7 @@ import com.bayer.diceapp.interactor.RollInteractor;
 import com.bayer.diceapp.network.NetworkModule;
 import com.bayer.diceapp.ui.UIModule;
 import com.bayer.diceapp.ui.main.MainActivity;
+import com.bayer.diceapp.ui.roll.RollFragment;
 import com.bayer.diceapp.ui.roll.RollPresenter;
 
 @Singleton
@@ -22,4 +23,6 @@ public interface DiceApplicationComponent {
     void inject(RollPresenter artistsPresenter);
 
     void inject(RollInteractor rollInteractor);
+
+    void inject(RollFragment rollFragment);
 }
