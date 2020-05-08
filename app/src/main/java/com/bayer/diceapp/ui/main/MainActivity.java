@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.bayer.diceapp.model.Roll;
 import com.bayer.diceapp.model.RollResult;
 import com.bayer.diceapp.model.Rolls;
 import com.bayer.diceapp.ui.roll.RollActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
@@ -49,6 +51,14 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     protected void onResume() {
         super.onResume();
         mainPresenter.showRolls();
+        FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createRoll();
+            }
+        });
     }
 
     @Override
@@ -74,6 +84,12 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         Intent intent = new Intent(MainActivity.this, RollActivity.class);
         intent.putExtra(KEY_METHOD, KEY_METHOD_EDIT);
         intent.putExtra(KEY_ROLL, new Gson().toJson(roll));
+        startActivity(intent);
+    }
+
+    public void createRoll() {
+        Intent intent = new Intent(MainActivity.this, RollActivity.class);
+        intent.putExtra(KEY_METHOD, KEY_METHOD_CREATE);
         startActivity(intent);
     }
 }

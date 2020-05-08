@@ -4,8 +4,6 @@ import com.bayer.diceapp.DiceApplication;
 import com.bayer.diceapp.model.Roll;
 import com.bayer.diceapp.network.RollApi;
 
-import java.io.IOException;
-
 import javax.inject.Inject;
 
 import retrofit2.Call;
@@ -21,33 +19,29 @@ public class RollInteractor {
     }
 
     public void createRoll(Roll roll) {
-        Call<Void> query = rollApi.deleteroll(roll.getId());
+        Call<Void> query = rollApi.postroll(roll);
         try {
-            Response<Void> response = query.execute();
-        } catch (IOException e) {
+            query.execute();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void updateRoll(Roll roll) {
-        Call<Void> query = rollApi.deleteroll(roll.getId());
+        Call<Void> query = rollApi.putroll(roll);
         try {
-            Response<Void> response = query.execute();
-        } catch (IOException e) {
+            query.execute();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public String deleteRoll(Roll roll) {
+    public void deleteRoll(Roll roll) {
         Call<Void> query = rollApi.deleteroll(roll.getId());
         try {
-            Response<Void> response = query.execute();
-            if (response.code() == 200) {
-                return "Deleted";
-            }
-        } catch (IOException e) {
+            query.execute();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Couldn't delete";
     }
 }

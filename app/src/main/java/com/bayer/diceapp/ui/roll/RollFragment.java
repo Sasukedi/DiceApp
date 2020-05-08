@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -21,6 +22,7 @@ import javax.inject.Inject;
 public class RollFragment extends Fragment implements RollScreen {
     @Inject
     RollPresenter rollPresenter;
+    Context mContext;
 
     private EditText nameEditText;
     private EditText nodEditText;
@@ -39,6 +41,7 @@ public class RollFragment extends Fragment implements RollScreen {
     @Override
     public void onAttach(final Context context) {
         super.onAttach(context);
+        mContext = context;
 
         switch(getActivity().getIntent().getStringExtra(MainActivity.KEY_METHOD)) {
             case MainActivity.KEY_METHOD_CREATE:
@@ -46,7 +49,7 @@ public class RollFragment extends Fragment implements RollScreen {
                 break;
             case MainActivity.KEY_METHOD_EDIT:
                 method = MainActivity.KEY_METHOD_EDIT;
-                roll = (Roll) new Gson().fromJson(getActivity().getIntent().
+                roll = new Gson().fromJson(getActivity().getIntent().
                         getStringExtra(MainActivity.KEY_ROLL), Roll.class);
                 break;
         }
@@ -75,6 +78,8 @@ public class RollFragment extends Fragment implements RollScreen {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (roll == null)
+                    roll = new Roll();
                 roll.setName(nameEditText.getText().toString());
                 roll.setNumberOfDice(Integer.parseInt(nodEditText.getText().toString()));
                 roll.setNumberOfSides(Integer.parseInt(nosEditText.getText().toString()));
@@ -82,13 +87,13 @@ public class RollFragment extends Fragment implements RollScreen {
 
                 switch(method) {
                     case MainActivity.KEY_METHOD_CREATE:
-                        //TODO create roll POST
+                        rollPresenter.createRoll(roll);
                         break;
                     case MainActivity.KEY_METHOD_EDIT:
-                        //TODO update roll PUT
+                        rollPresenter.updateRoll(roll);
                         break;
                 }
-                //TODO close activity
+                getActivity().onBackPressed();
             }
         });
 
@@ -96,9 +101,9 @@ public class RollFragment extends Fragment implements RollScreen {
             @Override
             public void onClick(View v) {
                 if(method.equals(MainActivity.KEY_METHOD_EDIT)) {
-                    //TODO delete roll
+                    rollPresenter.deleteRoll(roll);
                 }
-                //TODO close activity
+                getActivity().onBackPressed();
             }
         });
 
@@ -108,7 +113,8 @@ public class RollFragment extends Fragment implements RollScreen {
     @Override
     public void onResume() {
         super.onResume();
-        showRoll();
+        if (method.equals(MainActivity.KEY_METHOD_EDIT))
+            showRoll();
     }
 
     @Override
