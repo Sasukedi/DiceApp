@@ -36,7 +36,7 @@ public class RollTest {
 
     @Test
     public void testDummy(){
-        verify(rollPresenter).
+
     }
 
     @After
