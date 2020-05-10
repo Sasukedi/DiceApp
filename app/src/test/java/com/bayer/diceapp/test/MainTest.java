@@ -70,7 +70,6 @@ public class MainTest {
         verify(mainScreen).showRolls(argumentCaptor.capture());
         Rolls capturedArgument = argumentCaptor.<Rolls> getValue();
         assert(capturedArgument.getRolls().size() == tempRolls.getRolls().size());
-        assert(capturedArgument.getRolls().size() == tempRolls.getRolls().size());
         assert(capturedArgument.getRolls().get(0).getId() == tempRolls.getRolls().get(0).getId());
         assert(capturedArgument.getRolls().get(1).getId() == tempRolls.getRolls().get(1).getId());
     }
