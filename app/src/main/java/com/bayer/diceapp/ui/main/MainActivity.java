@@ -17,6 +17,7 @@ import com.bayer.diceapp.model.RollResult;
 import com.bayer.diceapp.model.Rolls;
 import com.bayer.diceapp.ui.roll.RollActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
 
     private GridView gridView;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DiceApplication application = (DiceApplication) this.getApplication();
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         setContentView(R.layout.activity_main);
 
         gridView = findViewById(R.id.gridView);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     @Override
@@ -50,6 +55,11 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     @Override
     protected void onResume() {
         super.onResume();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.METHOD, "method");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+
         mainPresenter.showRolls();
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
 

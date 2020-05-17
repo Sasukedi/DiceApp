@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "548373922117",
+    "firebase_url": "https://diceapp-8a263.firebaseio.com",
+    "project_id": "diceapp-8a263",
+    "storage_bucket": "diceapp-8a263.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548373922117:android:5e54bfd7936d663bd97e2c",
+        "android_client_info": {
+          "package_name": "com.bayer.diceapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548373922117-peui29jr65euo6u69vo5qjomqgcha0e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQUERd9QjkWULBCK3YVI99PRzSejkw0pU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548373922117-peui29jr65euo6u69vo5qjomqgcha0e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
