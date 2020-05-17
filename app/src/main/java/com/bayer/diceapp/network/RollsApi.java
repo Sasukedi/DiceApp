@@ -15,7 +15,4 @@ public interface RollsApi {
   
   @GET("rolls")
   Call<Rolls> getrolls();
-    
-
-  
 }

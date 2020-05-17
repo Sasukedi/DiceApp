@@ -1,4 +1,8 @@
-package com.bayer.diceapp.network;
+package com.bayer.diceapp.mock;
+
+import com.bayer.diceapp.network.PlayApi;
+import com.bayer.diceapp.network.RollApi;
+import com.bayer.diceapp.network.RollsApi;
 
 import javax.inject.Singleton;
 
@@ -8,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class NetworkModule {
+public class MockNetworkModule {
     @Provides
     @Singleton
     public Retrofit.Builder provideRetrofit() {
@@ -19,19 +23,19 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public RollApi provideRollApi(Retrofit.Builder retrofitBuilder) {
-        return retrofitBuilder.baseUrl(NetworkConfig.ENDPOINT_ADDRESS).build().create(RollApi.class);
+    public RollsApi provideRollsApi(Retrofit.Builder retrofitBuilder) {
+        return new MockRollsApi();
     }
 
     @Provides
     @Singleton
-    public RollsApi provideRollsApi(Retrofit.Builder retrofitBuilder) {
-        return retrofitBuilder.baseUrl(NetworkConfig.ENDPOINT_ADDRESS).build().create(RollsApi.class);
+    public RollApi provideRollApi(Retrofit.Builder retrofitBuilder) {
+        return new MockRollApi();
     }
 
     @Provides
     @Singleton
     public PlayApi providePlayApi(Retrofit.Builder retrofitBuilder) {
-        return retrofitBuilder.baseUrl(NetworkConfig.ENDPOINT_ADDRESS).build().create(PlayApi.class);
+        return new MockPlayApi();
     }
 }
